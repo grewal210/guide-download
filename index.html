@@ -54,16 +54,6 @@
     button:hover {
       background-color: #0056b3;
     }
-    .logos {
-      margin-top: 2rem;
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-    }
-    .logos img {
-      height: 60px;
-      object-fit: contain;
-    }
   </style>
 </head>
 <body>
@@ -88,11 +78,6 @@
 
       <button type="submit">Download Now</button>
     </form>
-
-    <div class="logos">
-      <img src="exp-logo.png" alt="eXp Realty Logo">
-      <img src="royaltors-logo.png" alt="Royaltors Group Logo">
-    </div>
   </div>
 
   <iframe id="hiddenDownloader" style="display:none;"></iframe>
@@ -114,16 +99,11 @@
 
       fetch('https://script.google.com/macros/s/AKfycbyjcL4XV9Mbjt2m2zD1m_vEq_1OefYitSWpUpu3bcEU6ZGghWZWHWUwjAUqS0eDVd0n1Q/exec', {
         method: 'POST',
+        mode: 'no-cors',
         body: JSON.stringify({ name, email, phone, guide }),
         headers: { 'Content-Type': 'application/json' }
       })
-      .then(response => {
-        if (!response.ok) throw new Error('Network response was not ok');
-        return response.json();
-      })
-      .then(result => {
-        if (result.status !== "success") throw new Error(result.message || 'Failed to send data');
-
+      .then(() => {
         const iframe = document.getElementById('hiddenDownloader');
         if (guide === "Seller's Guide") {
           iframe.src = "https://grewal210.github.io/guide-download/Sellers%20Guide%20-%20Maninder%20Grewal.pdf";
