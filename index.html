@@ -6,13 +6,13 @@
   <title>Download Your Real Estate Guide</title>
   <style>
     body { font-family: Arial, sans-serif; background: #ffffff; margin: 0; padding: 0; }
-    .container { max-width: 500px; margin: 50px auto; background: #f9f9f9; padding: 2rem; border-radius: 12px; 
-                 box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); text-align: center; }
+    .container { max-width: 500px; margin: 50px auto; background: #f9f9f9; padding: 2rem; border-radius: 12px;
+                 box-shadow: 0 4px 20px rgba(0,0,0,0.1); text-align: center; }
     h2 { margin-bottom: 1rem; color: #222; }
     form { text-align: left; }
-    label { display: block; margin: 1rem 0 0.25rem; font-weight: bold; color: #333; }
-    input, select { width: 100%; padding: 0.75rem; border-radius: 5px; border: 1px solid #ccc; box-sizing: border-box; }
-    button { margin-top: 1.5rem; width: 100%; padding: 0.75rem; background-color: #002f6c; color: #fff; border: none; 
+    label { display: block; margin: 1rem 0 .25rem; font-weight: bold; color: #333; }
+    input, select { width: 100%; padding: .75rem; border-radius: 5px; border: 1px solid #ccc; box-sizing: border-box; }
+    button { margin-top: 1.5rem; width: 100%; padding: .75rem; background-color: #002f6c; color: #fff; border: none;
              border-radius: 5px; font-size: 1rem; cursor: pointer; }
     button:hover { background-color: #0056b3; }
   </style>
@@ -20,13 +20,14 @@
 <body>
   <div class="container">
     <h2>Get Your Free Real Estate Guide</h2>
-    <form id="downloadForm">
+    <!-- Submission via hidden iframe to avoid CORS -->
+    <form id="downloadForm" action="https://script.google.com/macros/s/AKfycbyjcL4XV9Mbjt2m2zD1m_vEq_1OefYitSWpUpu3bcEU6ZGghWZWHWUwjAUqS0eDVd0n1Q/exec" method="post" target="submissionFrame">
       <label for="name">Name</label>
-      <input type="text" id="name" name="name" placeholder="Your Name" required/>
+      <input type="text" id="name" name="name" placeholder="Your Name" required />
       <label for="phone">Phone Number</label>
-      <input type="tel" id="phone" name="phone" placeholder="Your Phone Number" required/>
+      <input type="tel" id="phone" name="phone" placeholder="Your Phone Number" required />
       <label for="email">Email</label>
-      <input type="email" id="email" name="email" placeholder="Your Email" required/>
+      <input type="email" id="email" name="email" placeholder="Your Email" required />
       <label for="guide">Choose a Guide</label>
       <select id="guide" name="guide" required>
         <option value="">-- Select a Guide --</option>
@@ -36,37 +37,23 @@
       <button type="submit">Download Now</button>
     </form>
   </div>
+
+  <!-- Iframes: one to submit form, one to trigger download -->
+  <iframe name="submissionFrame" style="display:none;"></iframe>
   <iframe id="hiddenDownloader" style="display:none;"></iframe>
+
   <script>
-    const endpoint = 'https://script.google.com/macros/s/AKfycbyjcL4XV9Mbjt2m2zD1m_vEq_1OefYitSWpUpu3bcEU6ZGghWZWHWUwjAUqS0eDVd0n1Q/exec';
-    document.getElementById('downloadForm').addEventListener('submit', async function(e) {
-      e.preventDefault();
-      const formData = new FormData(this);
-      const payload = {
-        name: formData.get('name'),
-        phone: formData.get('phone'),
-        email: formData.get('email'),
-        guide: formData.get('guide')
-      };
-      try {
-        const response = await fetch(endpoint, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-        const result = await response.json();
-        if (result.status === 'success') {
-          const iframe = document.getElementById('hiddenDownloader');
-          iframe.src = payload.guide === "Seller's Guide"
-                        ? "https://grewal210.github.io/guide-download/Sellers%20Guide%20-%20Maninder%20Grewal.pdf"
-                        : "https://grewal210.github.io/guide-download/Buyer's%20Guide%20-%20Maninder%20Grewal.pdf";
+    document.getElementById('downloadForm').addEventListener('submit', function() {
+      // Wait briefly for form submission to complete, then trigger download
+      setTimeout(function() {
+        var guide = document.getElementById('guide').value;
+        var dl = document.getElementById('hiddenDownloader');
+        if (guide === "Seller's Guide") {
+          dl.src = "https://grewal210.github.io/guide-download/Sellers%20Guide%20-%20Maninder%20Grewal.pdf";
         } else {
-          alert('Error: ' + (result.message || 'Unknown error'));
+          dl.src = "https://grewal210.github.io/guide-download/Buyer's%20Guide%20-%20Maninder%20Grewal.pdf";
         }
-      } catch (err) {
-        console.error(err);
-        alert('Error: ' + err.message);
-      }
+      }, 500);
     });
   </script>
 </body>
