@@ -95,6 +95,8 @@
     </div>
   </div>
 
+  <iframe id="hiddenDownloader" style="display:none;"></iframe>
+
   <script>
     document.getElementById('downloadForm').addEventListener('submit', function(e) {
       e.preventDefault();
@@ -115,19 +117,23 @@
         body: JSON.stringify({ name, email, phone, guide }),
         headers: { 'Content-Type': 'application/json' }
       })
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) throw new Error('Network response was not ok');
+        return response.json();
+      })
       .then(result => {
-        if (result.status !== "success") throw new Error('Failed to send data');
+        if (result.status !== "success") throw new Error(result.message || 'Failed to send data');
 
+        const iframe = document.getElementById('hiddenDownloader');
         if (guide === "Seller's Guide") {
-          window.location.href = "https://grewal210.github.io/guide-download/Sellers%20Guide%20-%20Maninder%20Grewal.pdf";
+          iframe.src = "https://grewal210.github.io/guide-download/Sellers%20Guide%20-%20Maninder%20Grewal.pdf";
         } else if (guide === "Buyer's Guide") {
-          window.location.href = "https://grewal210.github.io/guide-download/Buyer's%20Guide%20-%20Maninder%20Grewal.pdf";
+          iframe.src = "https://grewal210.github.io/guide-download/Buyer's%20Guide%20-%20Maninder%20Grewal.pdf";
         }
       })
       .catch(err => {
         console.error(err);
-        alert('Something went wrong. Please try again later.');
+        alert('Something went wrong: ' + err.message);
       });
     });
   </script>
