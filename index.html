@@ -1,1 +1,130 @@
-[{"insert":"<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\" />\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n  <title>Download Your Real Estate Guide</title>\n  <style>\n    body {\n      font-family: Arial, sans-serif;\n      background: #ffffff;\n      margin: 0;\n      padding: 0;\n    }\n    .container {\n      max-width: 500px;\n      margin: 50px auto;\n      background: #f9f9f9;\n      padding: 2rem;\n      border-radius: 12px;\n      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);\n      text-align: center;\n    }\n    h2 {\n      margin-bottom: 1rem;\n      color: #222;\n    }\n    form {\n      text-align: left;\n    }\n    label {\n      display: block;\n      margin: 1rem 0 0.25rem;\n      font-weight: bold;\n      color: #333;\n    }\n    input, select {\n      width: 100%;\n      padding: 0.75rem;\n      border-radius: 5px;\n      border: 1px solid #ccc;\n      box-sizing: border-box;\n    }\n    button {\n      margin-top: 1.5rem;\n      width: 100%;\n      padding: 0.75rem;\n      background-color: #002f6c;\n      color: white;\n      border: none;\n      border-radius: 5px;\n      font-size: 1rem;\n      cursor: pointer;\n    }\n    button:hover {\n      background-color: #0056b3;\n    }\n    .logos {\n      display: flex;\n      justify-content: space-around;\n      align-items: center;\n      margin-top: 2rem;\n    }\n    .logos img {\n      height: 50px;\n      max-width: 45%;\n      object-fit: contain;\n    }\n  </style>\n</head>\n<body>\n  <div class=\"container\">\n    <h2>Get Your Free Real Estate Guide</h2>\n    <form id=\"downloadForm\">\n      <label for=\"name\">Name</label>\n      <input type=\"text\" name=\"name\" id=\"name\" required />\n\n      <label for=\"phone\">Phone Number</label>\n      <input type=\"tel\" name=\"phone\" id=\"phone\" required />\n\n      <label for=\"email\">Email</label>\n      <input type=\"email\" name=\"email\" id=\"email\" required />\n\n      <label for=\"guide\">Choose a Guide</label>\n      <select name=\"guide\" id=\"guide\" required>\n        <option value=\"\">-- Select a Guide --</option>\n        <option value=\"Seller's Guide\">Seller's Guide</option>\n        <option value=\"Buyer's Guide\">Buyer's Guide</option>\n      </select>\n\n      <button type=\"submit\">Download Now</button>\n    </form>\n    <div class=\"logos\">\n      <img src=\""},{"insert":"https://upload.wikimedia.org/wikipedia/commons/2/2c/EXP_Realty_logo.svg\"","attributes":{"link":"https://upload.wikimedia.org/wikipedia/commons/2/2c/EXP_Realty_logo.svg\""}},{"insert":" alt=\"eXp Realty Logo\">\n      <img src=\""},{"insert":"https://grewal210.github.io/guide-download/Royaltors%20Group-02.png\"","attributes":{"link":"https://grewal210.github.io/guide-download/Royaltors%20Group-02.png\""}},{"insert":" alt=\"Royaltors Group Logo\">\n    </div>\n  </div>\n\n  <script>\n    document.getElementById('downloadForm').addEventListener('submit', function(e) {\n      e.preventDefault();\n\n      const formData = new FormData(this);\n      const name = formData.get('name');\n      const email = formData.get('email');\n      const phone = formData.get('phone');\n      const guide = formData.get('guide');\n\n      if (!guide) {\n        alert('Please select a guide.');\n        return;\n      }\n\n      fetch('"},{"insert":"https://script.google.com/macros/s/AKfycbzJ0Pyjts1cwK7ZdqOX0coD6ZKTjEKWRbMpglR9jm8BchNlzaBW_-bOp8BobV8r0CeJSg/exec',","attributes":{"link":"https://script.google.com/macros/s/AKfycbzJ0Pyjts1cwK7ZdqOX0coD6ZKTjEKWRbMpglR9jm8BchNlzaBW_-bOp8BobV8r0CeJSg/exec',"}},{"insert":" {\n        method: 'POST',\n        body: JSON.stringify({ name, email, phone, guide }),\n        headers: { 'Content-Type': 'application/json' }\n      })\n      .then(response => {\n        if (guide === \"Seller's Guide\") {\n          window.location.href = \""},{"insert":"https://drive.google.com/uc?export=download&id=1uEw9f3JyoBnmxbyS3Ahar9pP3g5Lgnyt\";","attributes":{"link":"https://drive.google.com/uc?export=download&id=1uEw9f3JyoBnmxbyS3Ahar9pP3g5Lgnyt\";"}},{"insert":"\n        } else if (guide === \"Buyer's Guide\") {\n          window.location.href = \""},{"insert":"https://drive.google.com/uc?export=download&id=16LLL-d7KYS-gYzId9rJjxZselhtvxSJK\";","attributes":{"link":"https://drive.google.com/uc?export=download&id=16LLL-d7KYS-gYzId9rJjxZselhtvxSJK\";"}},{"insert":"\n        }\n      })\n      .catch(err => alert('Something went wrong. Please try again.'));\n    });\n  </script>\n</body>\n</html>\n\n"}]
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Download Your Real Estate Guide</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 500px;
+      margin: 50px auto;
+      background: #f9f9f9;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    h2 {
+      margin-bottom: 1rem;
+      color: #222;
+    }
+    form {
+      text-align: left;
+    }
+    label {
+      display: block;
+      margin: 1rem 0 0.25rem;
+      font-weight: bold;
+      color: #333;
+    }
+    input, select {
+      width: 100%;
+      padding: 0.75rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+    button {
+      margin-top: 1.5rem;
+      width: 100%;
+      padding: 0.75rem;
+      background-color: #002f6c;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .logos {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin-top: 2rem;
+    }
+    .logos img {
+      height: 50px;
+      max-width: 45%;
+      object-fit: contain;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Get Your Free Real Estate Guide</h2>
+    <form id="downloadForm">
+      <label for="name">Name</label>
+      <input type="text" name="name" id="name" required />
+
+      <label for="phone">Phone Number</label>
+      <input type="tel" name="phone" id="phone" required />
+
+      <label for="email">Email</label>
+      <input type="email" name="email" id="email" required />
+
+      <label for="guide">Choose a Guide</label>
+      <select name="guide" id="guide" required>
+        <option value="">-- Select a Guide --</option>
+        <option value="Seller's Guide">Seller's Guide</option>
+        <option value="Buyer's Guide">Buyer's Guide</option>
+      </select>
+
+      <button type="submit">Download Now</button>
+    </form>
+    <div class="logos">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/2/2c/EXP_Realty_logo.svg" alt="eXp Realty Logo">
+      <img src="https://grewal210.github.io/guide-download/Royaltors%20Group-02.png" alt="Royaltors Group Logo">
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('downloadForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const formData = new FormData(this);
+      const name = formData.get('name');
+      const email = formData.get('email');
+      const phone = formData.get('phone');
+      const guide = formData.get('guide');
+
+      if (!guide) {
+        alert('Please select a guide.');
+        return;
+      }
+
+      fetch('https://script.google.com/macros/s/AKfycbzJ0Pyjts1cwK7ZdqOX0coD6ZKTjEKWRbMpglR9jm8BchNlzaBW_-bOp8BobV8r0CeJSg/exec', {
+        method: 'POST',
+        body: JSON.stringify({ name, email, phone, guide }),
+        headers: { 'Content-Type': 'application/json' }
+      })
+      .then(response => {
+        if (guide === "Seller's Guide") {
+          window.location.href = "https://drive.google.com/uc?export=download&id=1uEw9f3JyoBnmxbyS3Ahar9pP3g5Lgnyt";
+        } else if (guide === "Buyer's Guide") {
+          window.location.href = "https://drive.google.com/uc?export=download&id=16LLL-d7KYS-gYzId9rJjxZselhtvxSJK";
+        }
+      })
+      .catch(err => alert('Something went wrong. Please try again.'));
+    });
+  </script>
+</body>
+</html>
