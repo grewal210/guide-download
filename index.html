@@ -99,16 +99,20 @@
 
       fetch('https://script.google.com/macros/s/AKfycbyjcL4XV9Mbjt2m2zD1m_vEq_1OefYitSWpUpu3bcEU6ZGghWZWHWUwjAUqS0eDVd0n1Q/exec', {
         method: 'POST',
-        mode: 'no-cors',
-        body: JSON.stringify({ name, email, phone, guide }),
-        headers: { 'Content-Type': 'application/json' }
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, phone, guide })
       })
-      .then(() => {
-        const iframe = document.getElementById('hiddenDownloader');
-        if (guide === "Seller's Guide") {
-          iframe.src = "https://grewal210.github.io/guide-download/Sellers%20Guide%20-%20Maninder%20Grewal.pdf";
-        } else if (guide === "Buyer's Guide") {
-          iframe.src = "https://grewal210.github.io/guide-download/Buyer's%20Guide%20-%20Maninder%20Grewal.pdf";
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === "success") {
+          const iframe = document.getElementById('hiddenDownloader');
+          if (guide === "Seller's Guide") {
+            iframe.src = "https://grewal210.github.io/guide-download/Sellers%20Guide%20-%20Maninder%20Grewal.pdf";
+          } else if (guide === "Buyer's Guide") {
+            iframe.src = "https://grewal210.github.io/guide-download/Buyer's%20Guide%20-%20Maninder%20Grewal.pdf";
+          }
+        } else {
+          alert('Something went wrong: ' + (data.message || 'Unknown error'));
         }
       })
       .catch(err => {
