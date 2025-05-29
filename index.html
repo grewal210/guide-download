@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,14 +55,13 @@
       background-color: #0056b3;
     }
     .logos {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
       margin-top: 2rem;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
     }
     .logos img {
-      height: 50px;
-      max-width: 45%;
+      height: 60px;
       object-fit: contain;
     }
   </style>
@@ -90,9 +88,10 @@
 
       <button type="submit">Download Now</button>
     </form>
+
     <div class="logos">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/2/2c/EXP_Realty_logo.svg" alt="eXp Realty Logo">
-      <img src="https://grewal210.github.io/guide-download/Royaltors%20Group-02.png" alt="Royaltors Group Logo">
+      <img src="exp-logo.png" alt="eXp Realty Logo">
+      <img src="royaltors-logo.png" alt="Royaltors Group Logo">
     </div>
   </div>
 
@@ -117,13 +116,18 @@
         headers: { 'Content-Type': 'application/json' }
       })
       .then(response => {
+        if (!response.ok) throw new Error('Failed to send data');
+
         if (guide === "Seller's Guide") {
-          window.location.href = "https://drive.google.com/uc?export=download&id=1uEw9f3JyoBnmxbyS3Ahar9pP3g5Lgnyt";
+          window.location.href = "https://grewal210.github.io/guide-download/Sellers%20Guide%20-%20Maninder%20Grewal.pdf";
         } else if (guide === "Buyer's Guide") {
-          window.location.href = "https://drive.google.com/uc?export=download&id=16LLL-d7KYS-gYzId9rJjxZselhtvxSJK";
+          window.location.href = "https://grewal210.github.io/guide-download/Buyer's%20Guide%20-%20Maninder%20Grewal.pdf";
         }
       })
-      .catch(err => alert('Something went wrong. Please try again.'));
+      .catch(err => {
+        console.error(err);
+        alert('Something went wrong. Please try again.');
+      });
     });
   </script>
 </body>
