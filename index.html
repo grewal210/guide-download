@@ -110,13 +110,14 @@
         return;
       }
 
-      fetch('https://script.google.com/macros/s/AKfycbzJ0Pyjts1cwK7ZdqOX0coD6ZKTjEKWRbMpglR9jm8BchNlzaBW_-bOp8BobV8r0CeJSg/exec', {
+      fetch('https://script.google.com/macros/s/AKfycbyYtAIvQTo2aT0XAehtAWu3b2tQYYsZo4gszrJxMsXeoYvKItW0Ehi-lU4V3zg1bJsw1w/exec', {
         method: 'POST',
         body: JSON.stringify({ name, email, phone, guide }),
         headers: { 'Content-Type': 'application/json' }
       })
-      .then(response => {
-        if (!response.ok) throw new Error('Failed to send data');
+      .then(response => response.json())
+      .then(result => {
+        if (result.status !== "success") throw new Error('Failed to send data');
 
         if (guide === "Seller's Guide") {
           window.location.href = "https://grewal210.github.io/guide-download/Sellers%20Guide%20-%20Maninder%20Grewal.pdf";
@@ -126,7 +127,7 @@
       })
       .catch(err => {
         console.error(err);
-        alert('Something went wrong. Please try again.');
+        alert('Something went wrong. Please try again later.');
       });
     });
   </script>
