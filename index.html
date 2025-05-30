@@ -21,7 +21,9 @@
   <div class="container">
     <h2>Get Your Free Real Estate Guide</h2>
     <!-- Submission via hidden iframe to avoid CORS -->
-    <form id="downloadForm" action="https://script.google.com/macros/s/AKfycbyjcL4XV9Mbjt2m2zD1m_vEq_1OefYitSWpUpu3bcEU6ZGghWZWHWUwjAUqS0eDVd0n1Q/exec" method="post" target="submissionFrame">
+    <form id="downloadForm"
+          action="https://script.google.com/macros/s/AKfycbyjcL4XV9Mbjt2m2zD1m_vEq_1OefYitSWpUpu3bcEU6ZGghWZWHWUwjAUqS0eDVd0n1Q/exec"
+          method="post" target="submissionFrame">
       <label for="name">Name</label>
       <input type="text" id="name" name="name" placeholder="Your Name" required />
       <label for="phone">Phone Number</label>
@@ -39,21 +41,19 @@
   </div>
 
   <!-- Iframes: one to submit form, one to trigger download -->
-  <iframe name="submissionFrame" style="display:none;"></iframe>
+  <iframe name="submissionFrame" id="submissionFrame" style="display:none;"></iframe>
   <iframe id="hiddenDownloader" style="display:none;"></iframe>
 
   <script>
-    document.getElementById('downloadForm').addEventListener('submit', function() {
-      // Wait briefly for form submission to complete, then trigger download
-      setTimeout(function() {
-        var guide = document.getElementById('guide').value;
-        var dl = document.getElementById('hiddenDownloader');
-        if (guide === "Seller's Guide") {
-          dl.src = "https://grewal210.github.io/guide-download/Sellers%20Guide%20-%20Maninder%20Grewal.pdf";
-        } else {
-          dl.src = "https://grewal210.github.io/guide-download/Buyer's%20Guide%20-%20Maninder%20Grewal.pdf";
-        }
-      }, 500);
+    // When the hidden submission frame loads, trigger the download
+    document.getElementById('submissionFrame').addEventListener('load', function() {
+      var guide = document.getElementById('guide').value;
+      var dl = document.getElementById('hiddenDownloader');
+      if (guide === "Seller's Guide") {
+        dl.src = "https://grewal210.github.io/guide-download/Sellers%20Guide%20-%20Maninder%20Grewal.pdf";
+      } else if (guide === "Buyer's Guide") {
+        dl.src = "https://grewal210.github.io/guide-download/Buyer%27s%20Guide%20-%20Maninder%20Grewal.pdf";
+      }
     });
   </script>
 </body>
